@@ -24,21 +24,21 @@ except Exception as e:
     print("❌ Error conectando a Mongo:", e)
 
 # ==============================
-# RUTA DE PRUEBA (IMPORTANTE)
+# RUTA DE PRUEBA (CORREGIDA)
 # ==============================
 @app.get("/")
 def root():
     return {
         "status": "ok",
-        "mongo": "connected" if db else "not connected"
+        "mongo": "connected" if db is not None else "not connected"
     }
 
 # ==============================
-# EJEMPLO ENDPOINT (OPCIONAL)
+# TEST DB (CORREGIDO)
 # ==============================
 @app.get("/test-db")
 def test_db():
-    if not db:
+    if db is None:
         return {"error": "No DB connection"}
 
     try:
